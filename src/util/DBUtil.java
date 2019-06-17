@@ -26,7 +26,7 @@ public class DBUtil {
         return connection;
     }
 
-    public static void releaseConnection(Connection connection, Statement statement, ResultSet resultSet){
+    public static void releaseConnection(Connection connection, Statement statement, PreparedStatement preparedStatement, ResultSet resultSet){
         if (connection != null){
             try {
                 connection.close();
@@ -37,6 +37,13 @@ public class DBUtil {
         if (statement != null){
             try {
                 statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if (preparedStatement != null){
+            try {
+                preparedStatement.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }

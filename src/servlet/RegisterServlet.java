@@ -26,11 +26,12 @@ public class RegisterServlet extends HttpServlet {
         UserBean userBean = new UserBean();
         userBean.setName(name);
         userBean.setPwd(pwd);
+        userBean.setEmail(email);
 
-        UserDao.addUser(userBean);
+        boolean result = UserDao.Register(userBean);
 
         PrintWriter printWriter = response.getWriter();
-        printWriter.print(true);
+        printWriter.print(result);
         printWriter.flush();
         printWriter.close();
     }
