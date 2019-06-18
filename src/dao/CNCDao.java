@@ -51,21 +51,23 @@ public class CNCDao {
             preparedStatement.setInt(1,id);
             resultSet = preparedStatement.executeQuery();
 
-            int cnc_id = resultSet.getInt("user_id");
-            String cnc_des = resultSet.getString("cnc_des");
-            String cnc_diagnose = resultSet.getString("cnc_diagnose");
-            String cnc_removal = resultSet.getString("cnc_removal");
-            String cnc_brand = resultSet.getString("cnc_brand");
-            String cnc_model = resultSet.getString("cnc_model");
-            String cnc_code = resultSet.getString("cnc_code");
-            String cnc_location = resultSet.getString("cnc_location");
-            String cnc_threshold = resultSet.getString("cnc_threshold");
-            String cnc_reality = resultSet.getString("cnc_reality");
-            String cnc_source = resultSet.getString("cnc_source");
-            int cnc_like = resultSet.getInt("cnc_like");
-            int cnc_view = resultSet.getInt("cnc_view");
+            while (resultSet.next()){
+                int cnc_id = resultSet.getInt("cnc_id");
+                String cnc_des = resultSet.getString("cnc_des");
+                String cnc_diagnose = resultSet.getString("cnc_diagnose");
+                String cnc_removal = resultSet.getString("cnc_removal");
+                String cnc_brand = resultSet.getString("cnc_brand");
+                String cnc_model = resultSet.getString("cnc_model");
+                String cnc_code = resultSet.getString("cnc_code");
+                String cnc_location = resultSet.getString("cnc_location");
+                String cnc_threshold = resultSet.getString("cnc_threshold");
+                String cnc_reality = resultSet.getString("cnc_reality");
+                String cnc_source = resultSet.getString("cnc_source");
+                int cnc_like = resultSet.getInt("cnc_like");
+                int cnc_view = resultSet.getInt("cnc_view");
 
-            retailBean = new CNCRetailBean(cnc_id,cnc_des,cnc_diagnose,cnc_removal,cnc_brand,cnc_model,cnc_code,cnc_location,cnc_threshold,cnc_reality,cnc_source,cnc_like,cnc_view);
+                retailBean = new CNCRetailBean(cnc_id,cnc_des,cnc_diagnose,cnc_removal,cnc_brand,cnc_model,cnc_code,cnc_location,cnc_threshold,cnc_reality,cnc_source,cnc_like,cnc_view);
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
