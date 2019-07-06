@@ -44,7 +44,7 @@ public class CNCDao {
     public static CNCRetailBean SearchRetailBean(int id){
         CNCRetailBean retailBean = null;
         connection = DBUtil.getConnection();
-        String sql = "SELECT * FROM t_cnc WHERE cnc_id = ?";
+        String sql = "SELECT * FROM t_cnc WHERE cnc_id = ?;";
 
         try {
             preparedStatement = connection.prepareStatement(sql);
@@ -78,4 +78,33 @@ public class CNCDao {
         return retailBean;
     }
 
+    public static boolean LikeAnswerInfo(int cnc_id){
+        connection = DBUtil.getConnection();
+        String sql1 = "SELECT * FROM t_cnc WHERE cnc_id = ?;";
+        String sql2 = "UPDATE t_cnc SET cnc_like = ? WHERE cnc_id = ?;";
+        int likeNum = 0;
+
+        try {
+            preparedStatement = connection.prepareStatement(sql1);
+            preparedStatement.setInt(1,cnc_id);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                likeNum = resultSet.getInt("cnc_like");
+            }
+
+            preparedStatement = connection.prepareStatement(sql2);
+            preparedStatement.setInt(1, ++likeNum);
+            preparedStatement.setInt(2, cnc_id);
+            resultSet = preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }finally {
+            DBUtil.releaseConnection(connection,statement,preparedStatement,resultSet);
+        }
+        return true;
+
+
+    }
 }

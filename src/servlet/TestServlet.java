@@ -20,23 +20,23 @@ public class TestServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        Connection connection = DBUtil.getConnection();
-//        PreparedStatement preparedStatement = null;
-//        String sql = "update t_cnc set cnc_like=?,cnc_view=? where cnc_id=?";
-//        try {
-//            for (int i = 18; i < 413;i++){
-//                int view = new Random().nextInt(10000);
-//                int like = new Random().nextInt(view);
-//                preparedStatement = connection.prepareStatement(sql);
-//                preparedStatement.setInt(1,like);
-//                preparedStatement.setInt(2,view);
-//                preparedStatement.setInt(3,i);
-//                preparedStatement.execute();
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        } finally {
-//            DBUtil.releaseConnection(connection,null,preparedStatement,null);
-//        }
+        Connection connection = DBUtil.getConnection();
+        PreparedStatement preparedStatement = null;
+        String sql = "update t_cnc set cnc_like=?,cnc_view=? where cnc_id=?";
+        try {
+            for (int i = 2; i < 413;i++){
+                int view = new Random().nextInt(25);
+                int like = new Random().nextInt(view);
+                preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setInt(1,like);
+                preparedStatement.setInt(2,view);
+                preparedStatement.setInt(3,i);
+                preparedStatement.execute();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.releaseConnection(connection,null,preparedStatement,null);
+        }
     }
 }
